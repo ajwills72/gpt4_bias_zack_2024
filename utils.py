@@ -4,7 +4,7 @@ from tqdm import tqdm
 import concurrent.futures
 import time
 
-openai.api_key = os.environ["OPENAI_API_KEY"]
+import apikey
 
 MODEL='gpt-4'
 def query_openai(query: list, temperature: float = 0.7, max_tokens: int = 100) -> str:

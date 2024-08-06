@@ -1,3 +1,41 @@
+# ajwills72 fork notes
+
+##  Explanatory notes / minor changes for noobs
+
+### Check working with small samples first
+
+The original authors provide `get_gpt4_dist.py` as a demo; note that this demo costs about $0.25 each time you run it. Although I haven't tried yet, I imagine the Jupyter notebooks in some cases cost several dollars each time you run them. **Don't run large sample code initially, run it with small samples until you're sure it works.** 
+
+### API keys
+
+In order to use an OpenAI model through an API (i.e. via code), you have to provide a valid API key linked to an openAI account that can be charged to. It is _really important_ that this API key is NOT included in the public repo, otherwise other people can get the queries for free using your money! The way I've handled it in this fork is by use of a file `apikey.py`, which is not included in the repo but is listed in `.gitignore` so it should be pretty hard to accidentally include the API key into the public repo. The file `apikey.py` has the following contents:
+
+```
+import openai
+openai.api_key = "THIS IS WHERE YOU PUT YOUR API KEY"
+```
+Any script querying GPT must include the line `import apikey`. I have made this change to `utils.py` in order to get the minimal test code (below) to work. 
+
+### Minimal test code
+
+I've added `test_working.py`. Use this first to check you have a properly functioning environment. You can run it either directly from the command line (`python test_working.py`), or through your IDE (I recommend Visual Studio Code). 
+
+If your environment is working correctly, you will end up with a file `output/results_demographics_temp_0.7_num_samples_1_max_tokens_100_condition_Sarcoidosis.json` which has a series of prompts and responses. This is a cut down version of the queries used to create the top left blue plot point in Figure 1 (cut down in the sense that each prompt is used once rather than 100 times)
+
+- If you are seeing errors such as `no module named XXX`, you need to install the appropriate Python packages. How you do this depends on the package manager you are using (I recommend Anaconda). 
+
+- If you are getting `Error occurred ... API key ...`, your API key is not set up properly, see above.
+
+
+
+### Rate limits
+
+Depending on the type of account you have with OpenAI, the code in this repo may make more queries per minute than your rate limit, and you'll start to get errors. There are two ways around this. (1) Give OpenAI more money, (2) use some Python code to slow down your query rate and retry in the case of failed queries. 
+
+
+
+# Original fork notes
+
 # Assessing GPT-4’s Potential for Perpetuating Racial and Gender Biases in Healthcare
 
 This repository accompanies the paper ["Coding Inequity: Assessing GPT-4’s Potential for Perpetuating Racial and Gender Biases in Healthcare"](https://www.medrxiv.org/content/10.1101/2023.07.13.23292577v1).
